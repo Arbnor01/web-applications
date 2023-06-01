@@ -48,9 +48,9 @@ _Replace these with your own design._
 
 POST /albums
 Body params:
-  title=Voyage
-  release_year=2022
-  artist_id=2
+  title='OK Computer'
+  release_year='1997'
+  artist_id='1'
 
 # Expected response:
 
@@ -73,7 +73,7 @@ describe Application do
   context "POST /albums" do
     it 'returns 200 OK' do
       # Assuming the post with id 1 exists.
-      response = post('/albums', title: 'Voyage', release_year: 2022, artist_id: 2)
+      response = post('/albums', title: 'OK Computer', release_year: 1997, artist_id: 1)
       expect(response.status).to eq(200)
     end
   end
