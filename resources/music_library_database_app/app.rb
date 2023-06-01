@@ -13,7 +13,7 @@ class Application < Sinatra::Base
     also_reload 'lib/album_repository'
     also_reload 'lib/artist_repository'
   end
-
+# GET route to retrieve all albums
   get '/albums' do
     repo = AlbumRepository.new
     albums = repo.all
@@ -24,7 +24,7 @@ class Application < Sinatra::Base
 
     return response
   end
-
+# POST route to create a new album
   post '/albums' do
     repo = AlbumRepository.new
     new_album = Album.new
@@ -36,7 +36,7 @@ class Application < Sinatra::Base
 
     return ('')
   end
-
+# GET route to retrieve all artists
   get '/artists' do
     repo = ArtistRepository.new
     artists = repo.all
@@ -46,5 +46,16 @@ class Application < Sinatra::Base
     end.join(', ')
 
     return response
+  end
+# POST route to create a new artist
+  post '/artists' do
+    repo = ArtistRepository.new
+    new_artist = Artist.new
+    new_artist.name = params[:name]
+    new_artist.genre = params[:genre]
+
+    repo.create(new_artist)
+
+    return ('')
   end
 end
