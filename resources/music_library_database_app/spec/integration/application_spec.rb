@@ -51,4 +51,24 @@ describe Application do
       expect(response.body).to eq(expected_response)
     end
   end
+
+  context 'POST /artists' do
+    it 'should create a new artist and return it in the response of GET /artists' do
+      # Send a POST request to the '/artists' endpoint with the necessary body parameters
+      post('/artists', { name: 'Wild nothing', genre: 'Indie' })
+  
+      # Verify that the response status is 200 (OK)
+      expect(last_response.status).to eq(200)
+      # Verify that the response body is empty
+      expect(last_response.body).to eq('')
+  
+      # Send a subsequent GET request to '/artists'
+      get('/artists')
+  
+      # Verify that the response status is 200 (OK)
+      expect(last_response.status).to eq(200)
+      # Verify that the response body includes the newly created artist
+      expect(last_response.body).to include('Wild nothing')
+    end
+  end
 end
